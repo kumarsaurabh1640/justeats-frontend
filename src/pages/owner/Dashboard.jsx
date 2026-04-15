@@ -145,13 +145,16 @@ export default function Dashboard() {
       ) : (
         <div className="grid gap-4">
           {restaurants.map((r) => (
-            <div key={r.id} className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div key={r.id} className={`bg-white rounded-xl border p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 transition-opacity ${r.is_active ? 'border-gray-200' : 'border-gray-200 opacity-60'}`}>
               <div>
                 <div className="flex items-center gap-2 flex-wrap">
                   <h3 className="font-semibold text-gray-900">{r.name}</h3>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${r.is_active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                     {r.is_active ? 'Active' : 'Inactive'}
                   </span>
+                  {!r.is_active && (
+                    <span className="text-xs text-gray-400 italic">Hidden from customers</span>
+                  )}
                 </div>
                 {r.cuisine_type && <p className="text-sm text-orange-500 mt-0.5">{r.cuisine_type}</p>}
                 {r.location && <p className="text-xs text-gray-500 mt-0.5">{r.location}</p>}

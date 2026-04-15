@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { restaurantsApi } from '../../api/restaurants';
 import { menuItemsApi } from '../../api/menuItems';
-import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import { Edit2, Eye, EyeOff, Plus, Star, Trash2, X } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
@@ -25,7 +24,6 @@ const inputCls =
   'w-full px-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent';
 
 export default function MenuManager() {
-  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [restaurants, setRestaurants] = useState([]);
   const [selectedId, setSelectedId] = useState(searchParams.get('restaurant') || '');
@@ -41,11 +39,10 @@ export default function MenuManager() {
 
   // Load owner's restaurants once on mount
   useEffect(() => {
-    restaurantsApi.list().then(({ data }) => {
-      const mine = data.filter((r) => r.owner_id === user?.sub);
-      setRestaurants(mine);
-      if (!selectedId && mine.length > 0) setSelectedId(mine[0].id);
-    });
+    restaurantsApi.mine().then(({ data }) => {
+      setRestaurants(data);
+      if (!selectedId && data.length > 0) setSelectedId(data[0].id);
+    }).catch(() => toast.error('Failed to load restaurants'));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { restaurantsApi } from '../../api/restaurants';
 import { ordersApi } from '../../api/orders';
-import { useAuth } from '../../context/AuthContext';
 import toast from 'react-hot-toast';
 import { ChevronDown, ChevronUp, ClipboardList } from 'lucide-react';
 import { format } from 'date-fns';
@@ -27,7 +26,6 @@ const NEXT_STATUSES = {
 };
 
 export default function OrderManager() {
-  const { user } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const [restaurants, setRestaurants] = useState([]);
   const [selectedId, setSelectedId] = useState(searchParams.get('restaurant') || '');
@@ -37,11 +35,10 @@ export default function OrderManager() {
   const [updatingId, setUpdatingId] = useState(null);
 
   useEffect(() => {
-    restaurantsApi.list().then(({ data }) => {
-      const mine = data.filter((r) => r.owner_id === user?.sub);
-      setRestaurants(mine);
-      if (!selectedId && mine.length > 0) setSelectedId(mine[0].id);
-    });
+    restaurantsApi.mine().then(({ data }) => {
+      setRestaurants(data);
+      if (!selectedId && data.length > 0) setSelectedId(data[0].id);
+    }).catch(() => toast.error('Failed to load restaurants'));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -130,7 +127,7 @@ export default function OrderManager() {
                   <div className="space-y-2 mb-4">
                     {order.order_items.map((oi) => (
                       <div key={oi.id} className="flex justify-between text-sm">
-                        <span className="text-gray-700">{oi.quantity}× item</span>
+                        <span className="text-gray-700">{oi.quantity}× {oi.name || 'Item'}</span>
                         <span className="font-medium">£{Number(oi.subtotal).toFixed(2)}</span>
                       </div>
                     ))}

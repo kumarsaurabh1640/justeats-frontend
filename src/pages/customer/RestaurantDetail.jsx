@@ -36,6 +36,12 @@ export default function RestaurantDetail() {
         setMenuItems(menuRes.data);
         setIsFav(favRes.data.some((r) => r.id === id));
         setMostlyOrdered(mostlyRes.data);
+
+        if (!restRes.data.is_active) {
+          toast.error('This restaurant is no longer available');
+          navigate('/');
+          return;
+        }
       } catch {
         toast.error('Failed to load restaurant');
         navigate('/');
