@@ -39,10 +39,10 @@ export default function Dashboard() {
   const loadRestaurants = async () => {
     try {
       const [restaurantsRes, profileRes] = await Promise.all([
-        restaurantsApi.list(),
+        restaurantsApi.mine(),
         profileApi.getOwner(),
       ]);
-      setRestaurants(restaurantsRes.data.filter((r) => r.owner_id === user?.sub));
+      setRestaurants(restaurantsRes.data);
       setOwnerName(profileRes.data.full_name || '');
     } catch {
       toast.error('Failed to load dashboard');
