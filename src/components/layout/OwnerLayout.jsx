@@ -35,7 +35,7 @@ export default function OwnerLayout() {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-56 bg-white border-r border-gray-200 flex flex-col shrink-0 h-screen transition-transform duration-200 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-56 bg-white border-r border-gray-200 flex flex-col shrink-0 h-screen transition-transform duration-200 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="h-16 flex items-center justify-between px-4 border-b border-gray-200 shrink-0">
           <Link to="/owner/dashboard" className="flex items-center gap-2 font-bold text-orange-500 text-xl">
             <UtensilsCrossed className="w-6 h-6" />
@@ -70,7 +70,7 @@ export default function OwnerLayout() {
       </aside>
 
       {/* Main content with mobile top bar */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 lg:pl-56">
         {/* Mobile top bar */}
         <div className="lg:hidden h-16 bg-white border-b border-gray-200 flex items-center px-4 gap-3 sticky top-0 z-30 shrink-0">
           <button

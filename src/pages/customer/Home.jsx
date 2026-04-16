@@ -3,7 +3,7 @@ import { restaurantsApi } from '../../api/restaurants';
 import { favouritesApi } from '../../api/favourites';
 import { recommendationsApi } from '../../api/recommendations';
 import toast from 'react-hot-toast';
-import { Search, Sparkles, UtensilsCrossed } from 'lucide-react';
+import { Search, Sparkles, UtensilsCrossed, Heart } from 'lucide-react';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
 import RestaurantCard from '../../components/restaurant/RestaurantCard';
 
@@ -53,6 +53,8 @@ export default function Home() {
   };
 
   const cuisines = [...new Set(restaurants.map((r) => r.cuisine_type).filter(Boolean))];
+
+  const favouriteRestaurants = restaurants.filter((r) => favouriteIds.has(r.id));
 
   // A single search term matches restaurant name, location, OR cuisine type
   const filtered = restaurants.filter((r) => {
@@ -110,6 +112,25 @@ export default function Home() {
                 key={r.id}
                 restaurant={r}
                 isFav={favouriteIds.has(r.id)}
+                onToggleFav={toggleFavourite}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Favourites — hidden while the user is actively searching */}
+      {favouriteRestaurants.length > 0 && !search && !cuisineFilter && (
+        <div className="mb-10">
+          <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <Heart className="w-5 h-5 text-red-500 fill-red-500" /> Your Favourites
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {favouriteRestaurants.map((r) => (
+              <RestaurantCard
+                key={r.id}
+                restaurant={r}
+                isFav={true}
                 onToggleFav={toggleFavourite}
               />
             ))}
