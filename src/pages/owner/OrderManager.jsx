@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { restaurantsApi } from '../../api/restaurants';
 import { ordersApi } from '../../api/orders';
@@ -108,7 +108,7 @@ export default function OrderManager() {
                   <div>
                     <p className="text-sm font-medium text-gray-900">
                       {order.order_items.length} item{order.order_items.length !== 1 ? 's' : ''} ·{' '}
-                      <span className="text-orange-600 font-semibold">£{Number(order.total_amount).toFixed(2)}</span>
+                      <span className="text-orange-600 font-semibold">₹{Number(order.total_amount).toFixed(2)}</span>
                     </p>
                     <p className="text-xs text-gray-400 mt-0.5">
                       {order.created_at ? format(new Date(order.created_at), 'dd MMM yyyy, HH:mm') : 'Just now'}
@@ -128,12 +128,12 @@ export default function OrderManager() {
                     {order.order_items.map((oi) => (
                       <div key={oi.id} className="flex justify-between text-sm">
                         <span className="text-gray-700">{oi.quantity}× {oi.name || 'Item'}</span>
-                        <span className="font-medium">£{Number(oi.subtotal).toFixed(2)}</span>
+                        <span className="font-medium">₹{Number(oi.subtotal).toFixed(2)}</span>
                       </div>
                     ))}
                     <div className="border-t pt-2 flex justify-between font-semibold text-sm">
                       <span>Total</span>
-                      <span className="text-orange-600">£{Number(order.total_amount).toFixed(2)}</span>
+                      <span className="text-orange-600">₹{Number(order.total_amount).toFixed(2)}</span>
                     </div>
                   </div>
 

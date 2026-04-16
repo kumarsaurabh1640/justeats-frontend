@@ -1,4 +1,4 @@
-import { Flame, Plus } from 'lucide-react';
+﻿import { Flame, Plus } from 'lucide-react';
 
 export default function MenuItemCard({ item, onAdd, addingId }) {
   return (
@@ -24,7 +24,7 @@ export default function MenuItemCard({ item, onAdd, addingId }) {
         {item.description && (
           <p className="text-sm text-gray-500 mt-0.5 truncate">{item.description}</p>
         )}
-        <p className="text-orange-600 font-semibold mt-1">£{Number(item.price).toFixed(2)}</p>
+        <p className="text-orange-600 font-semibold mt-1">₹{Number(item.price).toFixed(2)}</p>
       </div>
       <button
         onClick={() => onAdd(item)}

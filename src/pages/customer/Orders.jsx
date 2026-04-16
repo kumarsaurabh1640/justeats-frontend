@@ -97,7 +97,7 @@ export default function Orders() {
                         {previewNames}
                       </p>
                       <p className="text-xs text-gray-500 mt-0.5">
-                        <span className="text-orange-600 font-semibold">£{Number(order.total_amount).toFixed(2)}</span>
+                        <span className="text-orange-600 font-semibold">₹{Number(order.total_amount).toFixed(2)}</span>
                         {' · '}
                         {order.order_items.length} item{order.order_items.length !== 1 ? 's' : ''}
                       </p>
@@ -124,13 +124,13 @@ export default function Orders() {
                           <span className="text-gray-700">
                             {oi.quantity}× <span className="font-medium">{oi.name ?? 'Unknown item'}</span>
                           </span>
-                          <span className="text-gray-900 font-medium">£{Number(oi.subtotal).toFixed(2)}</span>
+                          <span className="text-gray-900 font-medium">₹{Number(oi.subtotal).toFixed(2)}</span>
                         </div>
                       ))}
                     </div>
                     <div className="border-t border-gray-100 mt-3 pt-3 flex justify-between font-semibold">
                       <span>Total</span>
-                      <span className="text-orange-600">£{Number(order.total_amount).toFixed(2)}</span>
+                      <span className="text-orange-600">₹{Number(order.total_amount).toFixed(2)}</span>
                     </div>
                   </div>
                 )}

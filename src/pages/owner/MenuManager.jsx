@@ -160,7 +160,7 @@ export default function MenuManager() {
                 <FormField label="Name *" error={errors.name?.message}>
                   <input {...register('name')} className={inputCls} />
                 </FormField>
-                <FormField label="Price (£) *" error={errors.price?.message}>
+                <FormField label="Price (₹) *" error={errors.price?.message}>
                   <input {...register('price')} type="number" step="0.01" className={inputCls} />
                 </FormField>
                 <FormField label="Category" error={errors.category?.message}>
@@ -220,7 +220,7 @@ export default function MenuManager() {
                   {!item.is_available && <span className="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Unavailable</span>}
                 </div>
                 {item.category && <p className="text-xs text-gray-500 mt-0.5">{item.category}</p>}
-                <p className="text-orange-600 font-semibold text-sm mt-1">£{Number(item.price).toFixed(2)}</p>
+                <p className="text-orange-600 font-semibold text-sm mt-1">₹{Number(item.price).toFixed(2)}</p>
               </div>
               <div className="flex items-center gap-1.5">
                 <button onClick={() => toggleSpecial(item)} title="Toggle special" className="p-2 rounded-lg hover:bg-yellow-50 text-gray-400 hover:text-yellow-500">

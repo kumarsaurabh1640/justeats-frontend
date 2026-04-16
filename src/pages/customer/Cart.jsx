@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cartApi } from '../../api/cart';
 import { ordersApi } from '../../api/orders';
@@ -119,7 +119,7 @@ export default function Cart() {
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <div>
                     <p className="font-medium text-gray-900">{item.name}</p>
-                    <p className="text-sm text-gray-500">£{Number(item.unit_price).toFixed(2)} each</p>
+                    <p className="text-sm text-gray-500">₹{Number(item.unit_price).toFixed(2)} each</p>
                   </div>
                   <button onClick={() => removeItem(item.id)} className="text-gray-400 hover:text-red-500 shrink-0">
                     <Trash2 className="w-4 h-4" />
@@ -141,7 +141,7 @@ export default function Cart() {
                       <Plus className="w-3 h-3" />
                     </button>
                   </div>
-                  <p className="font-semibold text-gray-900">£{Number(item.subtotal).toFixed(2)}</p>
+                  <p className="font-semibold text-gray-900">₹{Number(item.subtotal).toFixed(2)}</p>
                 </div>
               </div>
             ))}
@@ -150,7 +150,7 @@ export default function Cart() {
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <div className="flex justify-between text-lg font-bold mb-6">
               <span>Total</span>
-              <span className="text-orange-600">£{total.toFixed(2)}</span>
+              <span className="text-orange-600">₹{total.toFixed(2)}</span>
             </div>
 
             <form onSubmit={handleSubmit(placeOrder)} className="space-y-4">

@@ -181,7 +181,7 @@ export default function RestaurantDetail() {
             </select>
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Min Price (£)</label>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Min Price (₹)</label>
             <input
               type="number" min="0" step="0.01" value={minPrice}
               onChange={(e) => setMinPrice(e.target.value)}
@@ -190,7 +190,7 @@ export default function RestaurantDetail() {
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-600 mb-1">Max Price (£)</label>
+            <label className="block text-xs font-medium text-gray-600 mb-1">Max Price (₹)</label>
             <input
               type="number" min="0" step="0.01" value={maxPrice}
               onChange={(e) => setMaxPrice(e.target.value)}
